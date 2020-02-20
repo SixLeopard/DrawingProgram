@@ -43,7 +43,7 @@ def BGBlack():
 def BGWhite():
     screen.bgcolor("white")
 def PRed():
-    screen.pencolor("Red")
+    t.pencolor("Red")
 def PWhite():
     t.pencolor("white")
 def PBlack():
