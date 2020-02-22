@@ -15,29 +15,56 @@ t.shape("circle")
 t.shapesize(0.1)
 screen.bgcolor("white")
 frame.pack()
+t.pensize(width=1)
+t.speed(100000)
 #screen = t.TurtleScreen()
 loop2 = 1
 test = 1
 t.color("red")
 def pen1():
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    canvasturtle.unbind("<Button-1>")
     screen.onscreenclick(draw1)
 def pen2():
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    canvasturtle.unbind("<Button-1>")
     screen.onscreenclick(draw2)
 def pen3():
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    canvasturtle.unbind("<Button-1>")
     screen.onscreenclick(draw3)
+#def pen4():
+  #  t.penup()
+  #  screen.onscreenclick(draw4)
 def pen4():
+    screen.onscreenclick(none2)
+    canvasturtle=screen.getcanvas()
     t.penup()
-    screen.onscreenclick(draw4)
+    canvasturtle.bind("<B1-Motion>", draw42)
+    canvasturtle.bind("<Button-1>", draw42)
 def pen5():
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    canvasturtle.unbind("<Button-1>")
     t.penup()
     screen.onscreenclick(none)
 def pen7():
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    canvasturtle.unbind("<Button-1>")
     t.penup()
     screen.onscreenclick(Record)
 def none(x, y):
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    canvasturtle.unbind("<Button-1>")
     t.penup()
     t.goto(x, y)
-    print("nothing")
+def none2(x, y):
+    print(x, y)
 def BGBlack():
     screen.bgcolor("black")
 def BGWhite():
@@ -51,6 +78,8 @@ def PBlack():
 def PBlue():
     t.pencolor("Blue")
 def Record(x, y):
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
     t.goto(x, y)
     t.pendown()
     f = open('CustomPen.pen','a+')
@@ -61,6 +90,8 @@ def Record(x, y):
     f.close()
     print(str(t.pos()))
 def CustomPen1():
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
     p = open('CustomPen.pen','r')
     t.penup()
     for x in p:
@@ -84,6 +115,13 @@ def draw3(x , y):
 def draw4(x , y):
     t.goto(x, y)
     t.pendown()
+def draw42(event):
+    canvasturtle=screen.getcanvas()
+    canvasturtle.unbind("<B1-Motion>")
+    t.goto(event.x-455, 454-event.y)
+    print(event.x-455 , 454-event.y)
+    t.pendown()
+    canvasturtle.bind("<B1-Motion>", draw42)
 def Bac():
     t.setheading(90)
     t.penup()
@@ -182,4 +220,5 @@ button.pack(side=tk.RIGHT, padx=[10,20], pady=[0,0])
 button.pack()
 screen.listen()
 screen.mainloop()
+t.mainloop()
 root.mainloop()
