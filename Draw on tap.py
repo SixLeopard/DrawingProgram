@@ -1,4 +1,4 @@
-#Copyright Jamie Westerhout
+#Copyright Jamie Westerhout, 2020
 import tkinter as tk
 import turtle
 import random
@@ -12,7 +12,7 @@ canvas.pack()
 sys.stdout = open("log.txt", "+a")
 screen = turtle.TurtleScreen(canvas)
 t = turtle.RawTurtle(screen)
-root.title("Drawing Program - Copyright Jamie Westerhout, 2019")
+root.title("Drawing Program - Copyright Jamie Westerhout, 2020")
 root.iconbitmap('ICO.ico')
 t.shape("circle")
 t.shapesize(0.1)
