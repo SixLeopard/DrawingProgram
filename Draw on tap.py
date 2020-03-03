@@ -3,38 +3,35 @@ import tkinter as tk
 import turtle
 import random
 import sqlite3
-print("copyright Jamie Westerhout, 2019")
+import sys
 root = tk.Tk()
 root.configure(bg="darkgrey")
 frame = tk.Frame(root)
 canvas = tk.Canvas(master = root, width = 900, height = 900, bg="black")
 canvas.pack()
+sys.stdout = open("log.txt", "+a")
 screen = turtle.TurtleScreen(canvas)
 t = turtle.RawTurtle(screen)
+root.title("Drawing Program - Copyright Jamie Westerhout, 2019")
+root.iconbitmap('ICO.ico')
 t.shape("circle")
 t.shapesize(0.1)
+t.pensize(2)
 screen.bgcolor("white")
 frame.pack()
-t.pensize(width=1)
 t.speed(100000)
 #screen = t.TurtleScreen()
 loop2 = 1
 test = 1
 t.color("red")
 def pen1():
-    canvasturtle=screen.getcanvas()
-    canvasturtle.unbind("<B1-Motion>")
-    canvasturtle.unbind("<Button-1>")
+    unbind()
     screen.onscreenclick(draw1)
 def pen2():
-    canvasturtle=screen.getcanvas()
-    canvasturtle.unbind("<B1-Motion>")
-    canvasturtle.unbind("<Button-1>")
+    unbind()
     screen.onscreenclick(draw2)
 def pen3():
-    canvasturtle=screen.getcanvas()
-    canvasturtle.unbind("<B1-Motion>")
-    canvasturtle.unbind("<Button-1>")
+    unbind()
     screen.onscreenclick(draw3)
 #def pen4():
   #  t.penup()
@@ -45,24 +42,24 @@ def pen4():
     t.penup()
     canvasturtle.bind("<B1-Motion>", draw42)
     canvasturtle.bind("<Button-1>", draw42)
+    canvasturtle.bind("<ButtonRelease-1>", release)
 def pen5():
-    canvasturtle=screen.getcanvas()
-    canvasturtle.unbind("<B1-Motion>")
-    canvasturtle.unbind("<Button-1>")
+    unbind()
     t.penup()
     screen.onscreenclick(none)
 def pen7():
-    canvasturtle=screen.getcanvas()
-    canvasturtle.unbind("<B1-Motion>")
-    canvasturtle.unbind("<Button-1>")
+    unbind()
     t.penup()
     screen.onscreenclick(Record)
 def none(x, y):
+    unbind()
+    t.penup()
+    t.goto(x, y)
+def unbind():
     canvasturtle=screen.getcanvas()
     canvasturtle.unbind("<B1-Motion>")
     canvasturtle.unbind("<Button-1>")
-    t.penup()
-    t.goto(x, y)
+    canvasturtle.unbind("<ButtonRelease-1>")
 def none2(x, y):
     print(x, y)
 def BGBlack():
@@ -122,6 +119,15 @@ def draw42(event):
     print(event.x-455 , 454-event.y)
     t.pendown()
     canvasturtle.bind("<B1-Motion>", draw42)
+def release(event):
+    canvasturtle=screen.getcanvas()
+    unbind()
+    t.penup()
+    canvasturtle.bind("<Button-1>", reinziate)
+def reinziate(event):
+    t.penup()
+    t.goto(event.x-455, 454-event.y)
+    pen4()
 def Bac():
     t.setheading(90)
     t.penup()
