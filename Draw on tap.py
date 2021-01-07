@@ -1,19 +1,19 @@
-#Copyright Jamie Westerhout, 2021
+#Copyright Jamie Westerhout
 import tkinter as tk
 import turtle
 import random
 import sqlite3
 import sys
 root = tk.Tk()
-root.configure(bg="darkgrey")
+root.configure(bg="grey18")
 frame = tk.Frame(root)
-canvas = tk.Canvas(master = root, width = 900, height = 900, bg="black")
+canvas = tk.Canvas(master = root, width = 1500, height = 900, bg="black")
 canvas.pack()
 sys.stdout = open("log.txt", "+a")
 screen = turtle.TurtleScreen(canvas)
 t = turtle.RawTurtle(screen)
 root.title("Drawing Program - Copyright Jamie Westerhout, 2020")
-root.iconbitmap('ICO.ico')
+#root.iconbitmap('ICO.ico')
 t.shape("circle")
 t.shapesize(0.1)
 t.pensize(2)
@@ -39,7 +39,7 @@ def pen3():
 def pen4():
     screen.onscreenclick(none2)
     canvasturtle=screen.getcanvas()
-    t.penup()
+    t.penup() 
     canvasturtle.bind("<B1-Motion>", draw42)
     canvasturtle.bind("<Button-1>", draw42)
     canvasturtle.bind("<ButtonRelease-1>", release)
@@ -115,20 +115,23 @@ def draw4(x , y):
 def draw42(event):
     canvasturtle=screen.getcanvas()
     canvasturtle.unbind("<B1-Motion>")
-    t.goto(event.x-455, 454-event.y)
-    print(event.x-455 , 454-event.y)
+    t.goto(event.x-754, 452-event.y)
+    print(event.x-754 , 452-event.y)
     t.pendown()
     canvasturtle.bind("<B1-Motion>", draw42)
 def release(event):
     canvasturtle=screen.getcanvas()
     unbind()
     t.penup()
+    f = open('CustomPen.pen','a+')
+    f.write(str(float(t.xcor())))
     canvasturtle.bind("<Button-1>", reinziate)
 def reinziate(event):
     t.penup()
-    t.goto(event.x-455, 454-event.y)
+    t.goto(event.x-754, 452-event.y)
     pen4()
 def Bac():
+    t.speed(100000)
     t.setheading(90)
     t.penup()
     t.forward(90)
@@ -143,7 +146,6 @@ def Bac():
         t.left(angle)
         t.speed(10000000)
         legnth += 1.5
-        speed += 1.5
         angle += 1
         loop += 1
         txcord = t.xcor()
